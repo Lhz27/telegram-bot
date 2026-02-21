@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 
 import os
 
-TOKEN = os.getenv("8585206296:AAH2kYNvFA_RrCFb7m6a8AMxUdfG8b1nY_A")
+TOKEN = os.getenv("8585206296:AAHSICSuqdDJxPzXOYctG_LDLymSeAOOAq0")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
