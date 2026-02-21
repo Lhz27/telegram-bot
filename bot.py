@@ -59,7 +59,7 @@ async def main():
     print("Bot rodando...")
     application = ApplicationBuilder().token(TOKEN).build()
 
-    application.add_handler(CommandHandler("start", iniciar))
+    application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, responder))
 
     await application.initialize()
