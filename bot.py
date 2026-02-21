@@ -8,7 +8,7 @@ from threading import Thread
 # SERVIDOR WEB (OBRIGATÓRIO NO RENDER)
 # ===============================
 
-app_web = Flask(_name_)
+app_web = Flask(__name__)
 
 @app_web.route("/")
 def home():
