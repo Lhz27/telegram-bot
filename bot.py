@@ -29,7 +29,7 @@ def keep_alive():
 
 TOKEN = os.getenv("TOKEN")
 
-async def iniciar(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         ["📌 Informações"],
         ["💳 Chave PIX"],
