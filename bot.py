@@ -8,7 +8,7 @@ from threading import Thread
 # SERVIDOR WEB (OBRIGATÓRIO NO RENDER)
 # ===============================
 
-app_web = Flask(__name__)
+app_web = Flask(__nam2e__)
 
 @app_web.route("/")
 def home():
@@ -66,6 +66,6 @@ def main():
     # Inicia o bot e o loop de mensagens automaticamente
     application.run_polling(drop_pending_updates=True)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     keep_alive()  # abre a porta para o Render na thread do Flask
     main()        # inicia o bot e segura o processo principal
