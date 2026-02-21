@@ -1,6 +1,7 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import os
+import asyncio  # <-- Voltamos com o asyncio aqui
 from flask import Flask
 from threading import Thread
 
@@ -54,9 +55,14 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("Use os botões abaixo 👇")
 
-# Repare que agora é apenas def main() (sem o async)
 def main():
     print("Bot rodando...")
+    
+    # CORREÇÃO PARA O PYTHON 3.14 NO RENDER:
+    # Cria e define o loop de eventos manualmente antes de rodar o bot
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    
     application = ApplicationBuilder().token(TOKEN).build()
 
     # Usando a função start correta
