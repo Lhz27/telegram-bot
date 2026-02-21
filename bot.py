@@ -1,11 +1,12 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
-
 import os
+import asyncio
 
+# Pega o token da variável de ambiente do Render
 TOKEN = os.getenv("TOKEN")
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def iniciar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         ["📌 Informações"],
         ["💳 Chave PIX"],
@@ -31,10 +32,22 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("Use os botões abaixo 👇")
 
+# Criação do app
 app = ApplicationBuilder().token(TOKEN).build()
 
-app.add_handler(CommandHandler("start", start))
+# Handlers
+app.add_handler(CommandHandler(["start", "iniciar"], iniciar))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, responder))
 
-print("Bot rodando...")
-app.run_polling()
+
+# Inicialização compatível com Python 3.14
+async def main():
+    print("Bot rodando...")
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+    await app.updater.idle()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
