@@ -1,7 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import os
-import asyncio
 from flask import Flask
 from threading import Thread
 
@@ -9,7 +8,7 @@ from threading import Thread
 # SERVIDOR WEB (OBRIGATÓRIO NO RENDER)
 # ===============================
 
-app_web = Flask(__name__)
+app_web = Flask(_name_)
 
 @app_web.route("/")
 def home():
@@ -55,18 +54,18 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("Use os botões abaixo 👇")
 
-async def main():
+# Repare que agora é apenas def main() (sem o async)
+def main():
     print("Bot rodando...")
     application = ApplicationBuilder().token(TOKEN).build()
 
+    # Usando a função start correta
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, responder))
 
-    await application.initialize()
-    await application.start()
-    await application.updater.start_polling()
-    await application.updater.idle()
+    # Inicia o bot e o loop de mensagens automaticamente
+    application.run_polling(drop_pending_updates=True)
 
-if __name__ == "__main__":
-    keep_alive()  # abre a porta para o Render
-    asyncio.run(main())
+if _name_ == "_main_":
+    keep_alive()  # abre a porta para o Render na thread do Flask
+    main()        # inicia o bot e segura o processo principal
