@@ -35,7 +35,7 @@ RECEBENDO_COMPROVANTE = 1
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
-        ["📌 Informações"],
+        ["📌 Informações do evento"],
         ["💳 Chave PIX"],
         ["✅ Enviar Comprovante e Nomes"], # Botão Novo!
         ["❓ Dúvidas Frequentes"]
@@ -44,7 +44,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     await update.message.reply_text(
-        "Olá 👋\nEscolha uma opção:",
+        "Fala galopeiro!\nEscolha uma opção:",
         reply_markup=reply_markup
     )
 
@@ -53,7 +53,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def pedir_comprovante(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Quando a pessoa clica no botão, o bot pede os dados e "trava" esperando a resposta
     await update.message.reply_text(
-        "Ótimo! Para confirmar sua entrada, por favor envie a **foto do comprovante do PIX** e escreva os **nomes das pessoas** na mesma mensagem.\n\n(Se quiser cancelar o envio, digite /cancelar)"
+        "Ótimo! Para confirmar sua entrada, por favor envie a **foto do comprovante do PIX** e escreva os **nomes das pessoas** na legenda da foto.\n\n(Se quiser cancelar o envio, digite /cancelar)"
     )
     return RECEBENDO_COMPROVANTE
 
@@ -80,7 +80,7 @@ async def receber_dados(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     # 3. Agradece o cliente
-    await update.message.reply_text("Tudo certo! Recebemos seu comprovante e os nomes. Logo confirmaremos sua entrada! 🎉")
+    await update.message.reply_text("Já recebemos o seu comprovante, muito obrigado!")
     
     # Retorna o menu inicial para o cliente
     await start(update, context)
@@ -98,9 +98,9 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
     if text == "📌 Informações":
-        await update.message.reply_text("Aqui vão as informações sobre o evento...")
+        await update.message.reply_text("Aqui vão as informações sobre o evento... (ainda não informado)")
     elif text == "💳 Chave PIX":
-        await update.message.reply_text("Chave PIX: sua-chave@email.com\n\nApós realizar o pagamento, clique no botão '✅ Enviar Comprovante e Nomes' aqui embaixo.")
+        await update.message.reply_text("Chave PIX: sua-chave@email.com\n\nQyando fizer o pagamento, clique no botão '✅ Enviar Comprovante e Nomes' na tabela abaixo.")
     elif text == "❓ Dúvidas Frequentes":
         await update.message.reply_text("Dúvidas Frequentes:\n- Prazo 24h\n- Pagamento via PIX")
     else:
