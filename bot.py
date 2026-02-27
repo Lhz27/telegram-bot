@@ -106,7 +106,7 @@ async def responder(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
     elif text == "❓ Dúvidas Frequentes":
         # 👉 MUDE O TEXTO AQUI: Resposta do botão de Dúvidas
-        await update.message.reply_text("Dúvidas Frequentes:\n- Prazo 24h\n- Pagamento via PIX")
+        await update.message.reply_text("Dúvidas Frequentes:\n- Atendimento 24h\n- Pagamento via PIX")
         
     else:
         # 👉 MUDE O TEXTO AQUI: Se a pessoa digitar qualquer texto aleatório que não é um botão
